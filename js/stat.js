@@ -9,7 +9,6 @@ var FONT_GAP = 15;
 var TIME_GAP = 20;
 var COLUMN_WIDTH = 70;
 var barHeight = CLOUD_HEIGHT - (GAP + FONT_GAP + GAP) * 2 - GAP;
-// var barWidth = CLOUD_WIDTH - (COLUMN_WIDTH + GAP) * 2;
 var barPositionX = CLOUD_X + COLUMN_WIDTH + GAP;
 var barPositionY = CLOUD_Y + GAP + FONT_GAP + GAP + GAP / 2;
 
