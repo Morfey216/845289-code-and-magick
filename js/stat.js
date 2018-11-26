@@ -30,19 +30,13 @@ var getMaxElement = function (arr) {
 };
 
 var getColor = function (player) {
-  var redChanel = 0;
-  var greenChanel = 0;
-  var blueChanel = 255;
-  var opacityChanel = 1;
+  return (player === 'Вы') ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 255, ' + (Math.random() + 0.1) + ')';
+};
 
-  if (player === 'Вы') {
-    redChanel = 255;
-    blueChanel = 0;
-  } else {
-    opacityChanel = (Math.random() * 9 + 1) / 10;
-  }
-
-  return 'rgba(' + redChanel + ', ' + greenChanel + ', ' + blueChanel + ', ' + opacityChanel + ')';
+var drawColumn = function (ctx, height, color, player, multiplier) {
+  ctx.fillStyle = color;
+  ctx.fillRect(barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * multiplier, barPositionY + BAR_HEIGHT - height, COLUMN_WIDTH, height);
+  ctx.fillText(player, barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * multiplier + COLUMN_WIDTH / 2, CLOUD_HEIGHT - GAP);
 };
 
 window.renderStatistics = function (ctx, players, times) {
@@ -60,8 +54,6 @@ window.renderStatistics = function (ctx, players, times) {
   for (var i = 0; i < players.length; i++) {
     var columnHeight = BAR_HEIGHT * times[i] / maxTime;
     var columnColor = getColor(players[i]);
-    ctx.fillStyle = columnColor;
-    ctx.fillRect(barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * i, barPositionY + BAR_HEIGHT - columnHeight, COLUMN_WIDTH, columnHeight);
-    ctx.fillText(players[i], barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * i + COLUMN_WIDTH / 2, CLOUD_HEIGHT - GAP);
+    drawColumn(ctx, columnHeight, columnColor, players[i], i);
   }
 };
