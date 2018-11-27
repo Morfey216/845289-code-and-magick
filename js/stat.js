@@ -33,8 +33,8 @@ var getColor = function (player) {
   return (player === 'Вы') ? 'rgb(255, 0, 0)' : 'rgba(0, 0, 255, ' + (Math.random() + 0.1) + ')';
 };
 
-var drawColumn = function (ctx, height, color, player, multiplier) {
-  ctx.fillStyle = color;
+var drawColumn = function (ctx, height, player, multiplier) {
+  ctx.fillStyle = getColor(player);
   ctx.fillRect(barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * multiplier, barPositionY + BAR_HEIGHT - height, COLUMN_WIDTH, height);
   ctx.fillText(player, barPositionX + (COLUMN_WIDTH + COLUMN_GAP) * multiplier + COLUMN_WIDTH / 2, CLOUD_HEIGHT - GAP);
 };
@@ -53,7 +53,6 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
     var columnHeight = BAR_HEIGHT * times[i] / maxTime;
-    var columnColor = getColor(players[i]);
-    drawColumn(ctx, columnHeight, columnColor, players[i], i);
+    drawColumn(ctx, columnHeight, players[i], i);
   }
 };
