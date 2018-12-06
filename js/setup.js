@@ -39,6 +39,14 @@ var EYES_COLOR_SAMPLES = [
   'green'
 ];
 
+var FIREBALL_COLOR_SAMPLES = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var WIZARDS_NUMBER = 4;
 
 drawWizards(getAllWizards());
