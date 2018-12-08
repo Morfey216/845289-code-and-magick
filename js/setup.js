@@ -48,6 +48,54 @@ var FIREBALL_COLOR_SAMPLES = [
 ];
 
 var WIZARDS_NUMBER = 4;
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+// Добавление обработчиков
+
+var setupOpen = document.querySelector('.setup-open');
+var userDialog = document.querySelector('.setup');
+
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+function openPopup() {
+  var setupClose = userDialog.querySelector('.setup-close');
+
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+
+  setupClose.addEventListener('click', function () {
+    closePopup();
+  });
+
+  setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closePopup();
+    }
+  });
+
+  function onPopupEscPress(evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
+  }
+
+  function closePopup() {
+    userDialog.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress);
+  }
+}
+
+// Отрисовка похожих персонажей
 
 drawWizards(getAllWizards());
 
@@ -88,7 +136,7 @@ function getAllWizards() {
 function drawWizards(wizards) {
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var fragment = document.createDocumentFragment();
-  var userDialog = document.querySelector('.setup');
+  // var userDialog = document.querySelector('.setup');
   var similarListElement = userDialog.querySelector('.setup-similar-list');
 
   for (var index = 0; index < wizards.length; index++) {
@@ -107,5 +155,5 @@ function drawWizards(wizards) {
 
   similarListElement.appendChild(fragment);
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
-  userDialog.classList.remove('hidden');
+  // userDialog.classList.remove('hidden');
 }
