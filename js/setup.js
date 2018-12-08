@@ -70,6 +70,7 @@ setupOpen.addEventListener('keydown', function (evt) {
 function openPopup() {
   var setupClose = userDialog.querySelector('.setup-close');
   var userNameInput = userDialog.querySelector('.setup-user-name');
+  var setupFireballWrap = userDialog.querySelector('.setup-fireball-wrap');
 
   userDialog.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
@@ -121,6 +122,22 @@ function openPopup() {
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   }
+
+  setupFireballWrap.addEventListener('click', function () {
+    var fireballColor = createWizardFireballColor();
+    setupFireballWrap.style.backgroundColor = fireballColor;
+    setupFireballWrap.querySelector('input').value = fireballColor;
+  });
+
+
+}
+
+function getIndex(maxIndex) {
+  return Math.floor(Math.random() * maxIndex);
+}
+
+function createWizardFireballColor() {
+  return FIREBALL_COLOR_SAMPLES[getIndex(FIREBALL_COLOR_SAMPLES.length)];
 }
 
 // Отрисовка похожих персонажей
@@ -140,10 +157,6 @@ function getAllWizards() {
       coatColor: createWizardCoatColor(),
       eyesColor: createWizardEyesColor()
     };
-  }
-
-  function getIndex(maxIndex) {
-    return Math.floor(Math.random() * maxIndex);
   }
 
   function createWizardName() {
