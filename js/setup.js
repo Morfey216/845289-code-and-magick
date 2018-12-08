@@ -84,6 +84,12 @@ function openPopup() {
     }
   });
 
+  userNameInput.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      evt.preventDefault();
+    }
+  });
+
   userNameInput.addEventListener('invalid', function () {
     if (userNameInput.validity.tooShort) {
       userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
